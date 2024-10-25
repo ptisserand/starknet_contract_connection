@@ -5,6 +5,24 @@
     "interface_name": "context_config::i_context_configs::IContextConfigs"
   },
   {
+    "name": "core::byte_array::ByteArray",
+    "type": "struct",
+    "members": [
+      {
+        "name": "data",
+        "type": "core::array::Array::<core::bytes_31::bytes31>"
+      },
+      {
+        "name": "pending_word",
+        "type": "core::felt252"
+      },
+      {
+        "name": "pending_word_len",
+        "type": "core::integer::u32"
+      }
+    ]
+  },
+  {
     "name": "context_config::types::Application",
     "type": "struct",
     "members": [
@@ -45,79 +63,7 @@
     ]
   },
   {
-    "name": "context_config::types::ContextRequestKind",
-    "type": "enum",
-    "variants": [
-      {
-        "name": "Add",
-        "type": "(core::felt252, context_config::types::Application)"
-      },
-      {
-        "name": "UpdateApplication",
-        "type": "context_config::types::Application"
-      },
-      {
-        "name": "AddMembers",
-        "type": "core::array::Array::<core::felt252>"
-      },
-      {
-        "name": "RemoveMembers",
-        "type": "core::array::Array::<core::felt252>"
-      },
-      {
-        "name": "Grant",
-        "type": "core::array::Array::<(core::felt252, context_config::types::Capability)>"
-      },
-      {
-        "name": "Revoke",
-        "type": "core::array::Array::<(core::felt252, context_config::types::Capability)>"
-      }
-    ]
-  },
-  {
-    "name": "context_config::types::ContextRequest",
-    "type": "struct",
-    "members": [
-      {
-        "name": "context_id",
-        "type": "core::felt252"
-      },
-      {
-        "name": "kind",
-        "type": "context_config::types::ContextRequestKind"
-      }
-    ]
-  },
-  {
-    "name": "context_config::types::RequestKind",
-    "type": "enum",
-    "variants": [
-      {
-        "name": "Context",
-        "type": "context_config::types::ContextRequest"
-      }
-    ]
-  },
-  {
-    "name": "context_config::types::Request",
-    "type": "struct",
-    "members": [
-      {
-        "name": "kind",
-        "type": "context_config::types::RequestKind"
-      },
-      {
-        "name": "signer_id",
-        "type": "core::felt252"
-      },
-      {
-        "name": "nonce",
-        "type": "core::integer::u64"
-      }
-    ]
-  },
-  {
-    "name": "context_config::types::Signed::<context_config::types::Request>",
+    "name": "context_config::types::Signed",
     "type": "struct",
     "members": [
       {
@@ -200,7 +146,7 @@
         "inputs": [
           {
             "name": "signed_request",
-            "type": "context_config::types::Signed::<context_config::types::Request>"
+            "type": "context_config::types::Signed"
           }
         ],
         "outputs": [],
@@ -302,24 +248,6 @@
       {
         "name": "owner",
         "type": "core::starknet::contract_address::ContractAddress"
-      }
-    ]
-  },
-  {
-    "name": "core::byte_array::ByteArray",
-    "type": "struct",
-    "members": [
-      {
-        "name": "data",
-        "type": "core::array::Array::<core::bytes_31::bytes31>"
-      },
-      {
-        "name": "pending_word",
-        "type": "core::felt252"
-      },
-      {
-        "name": "pending_word_len",
-        "type": "core::integer::u32"
       }
     ]
   },
@@ -489,4 +417,3 @@
     ]
   }
 ]
-
