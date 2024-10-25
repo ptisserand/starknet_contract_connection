@@ -44,103 +44,6 @@ P >
     { & self.provider } pub fn
     set_block(mut self, block_id : starknet :: core :: types :: BlockId)
     { self.block_id = block_id; }
-} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct MemberRemoved
-{ pub message : cainome :: cairo_serde :: ByteArray } impl cainome ::
-cairo_serde :: CairoSerde for MemberRemoved
-{
-    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
-    usize > = None; #[inline] fn
-    cairo_serialized_size(__rust : & Self :: RustType) -> usize
-    {
-        let mut __size = 0; __size += cainome :: cairo_serde :: ByteArray ::
-        cairo_serialized_size(& __rust.message); __size
-    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
-    core :: types :: FieldElement >
-    {
-        let mut __out : Vec < starknet :: core :: types :: FieldElement > =
-        vec! [];
-        __out.extend(cainome :: cairo_serde :: ByteArray ::
-        cairo_serialize(& __rust.message)); __out
-    } fn
-    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
-    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
-    {
-        let mut __offset = __offset; let message = cainome :: cairo_serde ::
-        ByteArray :: cairo_deserialize(__felts, __offset) ? ; __offset +=
-        cainome :: cairo_serde :: ByteArray ::
-        cairo_serialized_size(& message); Ok(MemberRemoved { message })
-    }
-} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct ContextRequest
-{
-    pub context_id : starknet :: core :: types :: FieldElement, pub kind :
-    ContextRequestKind
-} impl cainome :: cairo_serde :: CairoSerde for ContextRequest
-{
-    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
-    usize > = None; #[inline] fn
-    cairo_serialized_size(__rust : & Self :: RustType) -> usize
-    {
-        let mut __size = 0; __size += starknet :: core :: types ::
-        FieldElement :: cairo_serialized_size(& __rust.context_id); __size +=
-        ContextRequestKind :: cairo_serialized_size(& __rust.kind); __size
-    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
-    core :: types :: FieldElement >
-    {
-        let mut __out : Vec < starknet :: core :: types :: FieldElement > =
-        vec! [];
-        __out.extend(starknet :: core :: types :: FieldElement ::
-        cairo_serialize(& __rust.context_id));
-        __out.extend(ContextRequestKind :: cairo_serialize(& __rust.kind));
-        __out
-    } fn
-    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
-    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
-    {
-        let mut __offset = __offset; let context_id = starknet :: core ::
-        types :: FieldElement :: cairo_deserialize(__felts, __offset) ? ;
-        __offset += starknet :: core :: types :: FieldElement ::
-        cairo_serialized_size(& context_id); let kind = ContextRequestKind ::
-        cairo_deserialize(__felts, __offset) ? ; __offset +=
-        ContextRequestKind :: cairo_serialized_size(& kind);
-        Ok(ContextRequest { context_id, kind })
-    }
-} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct
-OwnershipTransferred
-{
-    pub previous_owner : cainome :: cairo_serde :: ContractAddress, pub
-    new_owner : cainome :: cairo_serde :: ContractAddress
-} impl cainome :: cairo_serde :: CairoSerde for OwnershipTransferred
-{
-    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
-    usize > = None; #[inline] fn
-    cairo_serialized_size(__rust : & Self :: RustType) -> usize
-    {
-        let mut __size = 0; __size += cainome :: cairo_serde ::
-        ContractAddress :: cairo_serialized_size(& __rust.previous_owner);
-        __size += cainome :: cairo_serde :: ContractAddress ::
-        cairo_serialized_size(& __rust.new_owner); __size
-    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
-    core :: types :: FieldElement >
-    {
-        let mut __out : Vec < starknet :: core :: types :: FieldElement > =
-        vec! [];
-        __out.extend(cainome :: cairo_serde :: ContractAddress ::
-        cairo_serialize(& __rust.previous_owner));
-        __out.extend(cainome :: cairo_serde :: ContractAddress ::
-        cairo_serialize(& __rust.new_owner)); __out
-    } fn
-    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
-    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
-    {
-        let mut __offset = __offset; let previous_owner = cainome ::
-        cairo_serde :: ContractAddress :: cairo_deserialize(__felts, __offset)
-        ? ; __offset += cainome :: cairo_serde :: ContractAddress ::
-        cairo_serialized_size(& previous_owner); let new_owner = cainome ::
-        cairo_serde :: ContractAddress :: cairo_deserialize(__felts, __offset)
-        ? ; __offset += cainome :: cairo_serde :: ContractAddress ::
-        cairo_serialized_size(& new_owner);
-        Ok(OwnershipTransferred { previous_owner, new_owner })
-    }
 } #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct Signed < A >
 {
     pub payload : Vec < starknet :: core :: types :: FieldElement > , pub
@@ -184,42 +87,91 @@ OwnershipTransferred
         :: FieldElement) > :: cairo_serialized_size(& signature);
         Ok(Signed { payload, signature })
     }
-} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct
-OwnershipTransferStarted
-{
-    pub previous_owner : cainome :: cairo_serde :: ContractAddress, pub
-    new_owner : cainome :: cairo_serde :: ContractAddress
-} impl cainome :: cairo_serde :: CairoSerde for OwnershipTransferStarted
+} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct CapabilityRevoked
+{ pub message : cainome :: cairo_serde :: ByteArray } impl cainome ::
+cairo_serde :: CairoSerde for CapabilityRevoked
 {
     type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
     usize > = None; #[inline] fn
     cairo_serialized_size(__rust : & Self :: RustType) -> usize
     {
-        let mut __size = 0; __size += cainome :: cairo_serde ::
-        ContractAddress :: cairo_serialized_size(& __rust.previous_owner);
-        __size += cainome :: cairo_serde :: ContractAddress ::
-        cairo_serialized_size(& __rust.new_owner); __size
+        let mut __size = 0; __size += cainome :: cairo_serde :: ByteArray ::
+        cairo_serialized_size(& __rust.message); __size
     } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
     core :: types :: FieldElement >
     {
         let mut __out : Vec < starknet :: core :: types :: FieldElement > =
         vec! [];
-        __out.extend(cainome :: cairo_serde :: ContractAddress ::
-        cairo_serialize(& __rust.previous_owner));
-        __out.extend(cainome :: cairo_serde :: ContractAddress ::
-        cairo_serialize(& __rust.new_owner)); __out
+        __out.extend(cainome :: cairo_serde :: ByteArray ::
+        cairo_serialize(& __rust.message)); __out
     } fn
     cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
     __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
     {
-        let mut __offset = __offset; let previous_owner = cainome ::
-        cairo_serde :: ContractAddress :: cairo_deserialize(__felts, __offset)
-        ? ; __offset += cainome :: cairo_serde :: ContractAddress ::
-        cairo_serialized_size(& previous_owner); let new_owner = cainome ::
-        cairo_serde :: ContractAddress :: cairo_deserialize(__felts, __offset)
-        ? ; __offset += cainome :: cairo_serde :: ContractAddress ::
-        cairo_serialized_size(& new_owner);
-        Ok(OwnershipTransferStarted { previous_owner, new_owner })
+        let mut __offset = __offset; let message = cainome :: cairo_serde ::
+        ByteArray :: cairo_deserialize(__felts, __offset) ? ; __offset +=
+        cainome :: cairo_serde :: ByteArray ::
+        cairo_serialized_size(& message); Ok(CapabilityRevoked { message })
+    }
+} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct ContextRequest
+{
+    pub context_id : starknet :: core :: types :: FieldElement, pub kind :
+    ContextRequestKind
+} impl cainome :: cairo_serde :: CairoSerde for ContextRequest
+{
+    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
+    usize > = None; #[inline] fn
+    cairo_serialized_size(__rust : & Self :: RustType) -> usize
+    {
+        let mut __size = 0; __size += starknet :: core :: types ::
+        FieldElement :: cairo_serialized_size(& __rust.context_id); __size +=
+        ContextRequestKind :: cairo_serialized_size(& __rust.kind); __size
+    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
+    core :: types :: FieldElement >
+    {
+        let mut __out : Vec < starknet :: core :: types :: FieldElement > =
+        vec! [];
+        __out.extend(starknet :: core :: types :: FieldElement ::
+        cairo_serialize(& __rust.context_id));
+        __out.extend(ContextRequestKind :: cairo_serialize(& __rust.kind));
+        __out
+    } fn
+    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
+    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
+    {
+        let mut __offset = __offset; let context_id = starknet :: core ::
+        types :: FieldElement :: cairo_deserialize(__felts, __offset) ? ;
+        __offset += starknet :: core :: types :: FieldElement ::
+        cairo_serialized_size(& context_id); let kind = ContextRequestKind ::
+        cairo_deserialize(__felts, __offset) ? ; __offset +=
+        ContextRequestKind :: cairo_serialized_size(& kind);
+        Ok(ContextRequest { context_id, kind })
+    }
+} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct MemberAdded
+{ pub message : cainome :: cairo_serde :: ByteArray } impl cainome ::
+cairo_serde :: CairoSerde for MemberAdded
+{
+    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
+    usize > = None; #[inline] fn
+    cairo_serialized_size(__rust : & Self :: RustType) -> usize
+    {
+        let mut __size = 0; __size += cainome :: cairo_serde :: ByteArray ::
+        cairo_serialized_size(& __rust.message); __size
+    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
+    core :: types :: FieldElement >
+    {
+        let mut __out : Vec < starknet :: core :: types :: FieldElement > =
+        vec! [];
+        __out.extend(cainome :: cairo_serde :: ByteArray ::
+        cairo_serialize(& __rust.message)); __out
+    } fn
+    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
+    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
+    {
+        let mut __offset = __offset; let message = cainome :: cairo_serde ::
+        ByteArray :: cairo_deserialize(__felts, __offset) ? ; __offset +=
+        cainome :: cairo_serde :: ByteArray ::
+        cairo_serialized_size(& message); Ok(MemberAdded { message })
     }
 } #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct Request
 {
@@ -255,6 +207,58 @@ OwnershipTransferStarted
         cairo_serialized_size(& signer_id); let nonce = u64 ::
         cairo_deserialize(__felts, __offset) ? ; __offset += u64 ::
         cairo_serialized_size(& nonce); Ok(Request { kind, signer_id, nonce })
+    }
+} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct ContextCreated
+{ pub message : cainome :: cairo_serde :: ByteArray } impl cainome ::
+cairo_serde :: CairoSerde for ContextCreated
+{
+    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
+    usize > = None; #[inline] fn
+    cairo_serialized_size(__rust : & Self :: RustType) -> usize
+    {
+        let mut __size = 0; __size += cainome :: cairo_serde :: ByteArray ::
+        cairo_serialized_size(& __rust.message); __size
+    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
+    core :: types :: FieldElement >
+    {
+        let mut __out : Vec < starknet :: core :: types :: FieldElement > =
+        vec! [];
+        __out.extend(cainome :: cairo_serde :: ByteArray ::
+        cairo_serialize(& __rust.message)); __out
+    } fn
+    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
+    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
+    {
+        let mut __offset = __offset; let message = cainome :: cairo_serde ::
+        ByteArray :: cairo_deserialize(__felts, __offset) ? ; __offset +=
+        cainome :: cairo_serde :: ByteArray ::
+        cairo_serialized_size(& message); Ok(ContextCreated { message })
+    }
+} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct ApplicationUpdated
+{ pub message : cainome :: cairo_serde :: ByteArray } impl cainome ::
+cairo_serde :: CairoSerde for ApplicationUpdated
+{
+    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
+    usize > = None; #[inline] fn
+    cairo_serialized_size(__rust : & Self :: RustType) -> usize
+    {
+        let mut __size = 0; __size += cainome :: cairo_serde :: ByteArray ::
+        cairo_serialized_size(& __rust.message); __size
+    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
+    core :: types :: FieldElement >
+    {
+        let mut __out : Vec < starknet :: core :: types :: FieldElement > =
+        vec! [];
+        __out.extend(cainome :: cairo_serde :: ByteArray ::
+        cairo_serialize(& __rust.message)); __out
+    } fn
+    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
+    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
+    {
+        let mut __offset = __offset; let message = cainome :: cairo_serde ::
+        ByteArray :: cairo_deserialize(__felts, __offset) ? ; __offset +=
+        cainome :: cairo_serde :: ByteArray ::
+        cairo_serialized_size(& message); Ok(ApplicationUpdated { message })
     }
 } #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct Application
 {
@@ -311,58 +315,6 @@ OwnershipTransferStarted
         cairo_serialized_size(& metadata);
         Ok(Application { id, blob, size, source, metadata })
     }
-} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct MemberAdded
-{ pub message : cainome :: cairo_serde :: ByteArray } impl cainome ::
-cairo_serde :: CairoSerde for MemberAdded
-{
-    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
-    usize > = None; #[inline] fn
-    cairo_serialized_size(__rust : & Self :: RustType) -> usize
-    {
-        let mut __size = 0; __size += cainome :: cairo_serde :: ByteArray ::
-        cairo_serialized_size(& __rust.message); __size
-    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
-    core :: types :: FieldElement >
-    {
-        let mut __out : Vec < starknet :: core :: types :: FieldElement > =
-        vec! [];
-        __out.extend(cainome :: cairo_serde :: ByteArray ::
-        cairo_serialize(& __rust.message)); __out
-    } fn
-    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
-    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
-    {
-        let mut __offset = __offset; let message = cainome :: cairo_serde ::
-        ByteArray :: cairo_deserialize(__felts, __offset) ? ; __offset +=
-        cainome :: cairo_serde :: ByteArray ::
-        cairo_serialized_size(& message); Ok(MemberAdded { message })
-    }
-} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct CapabilityRevoked
-{ pub message : cainome :: cairo_serde :: ByteArray } impl cainome ::
-cairo_serde :: CairoSerde for CapabilityRevoked
-{
-    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
-    usize > = None; #[inline] fn
-    cairo_serialized_size(__rust : & Self :: RustType) -> usize
-    {
-        let mut __size = 0; __size += cainome :: cairo_serde :: ByteArray ::
-        cairo_serialized_size(& __rust.message); __size
-    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
-    core :: types :: FieldElement >
-    {
-        let mut __out : Vec < starknet :: core :: types :: FieldElement > =
-        vec! [];
-        __out.extend(cainome :: cairo_serde :: ByteArray ::
-        cairo_serialize(& __rust.message)); __out
-    } fn
-    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
-    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
-    {
-        let mut __offset = __offset; let message = cainome :: cairo_serde ::
-        ByteArray :: cairo_deserialize(__felts, __offset) ? ; __offset +=
-        cainome :: cairo_serde :: ByteArray ::
-        cairo_serialized_size(& message); Ok(CapabilityRevoked { message })
-    }
 } #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct CapabilityGranted
 { pub message : cainome :: cairo_serde :: ByteArray } impl cainome ::
 cairo_serde :: CairoSerde for CapabilityGranted
@@ -389,9 +341,83 @@ cairo_serde :: CairoSerde for CapabilityGranted
         cainome :: cairo_serde :: ByteArray ::
         cairo_serialized_size(& message); Ok(CapabilityGranted { message })
     }
-} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct ContextCreated
+} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct
+OwnershipTransferStarted
+{
+    pub previous_owner : cainome :: cairo_serde :: ContractAddress, pub
+    new_owner : cainome :: cairo_serde :: ContractAddress
+} impl cainome :: cairo_serde :: CairoSerde for OwnershipTransferStarted
+{
+    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
+    usize > = None; #[inline] fn
+    cairo_serialized_size(__rust : & Self :: RustType) -> usize
+    {
+        let mut __size = 0; __size += cainome :: cairo_serde ::
+        ContractAddress :: cairo_serialized_size(& __rust.previous_owner);
+        __size += cainome :: cairo_serde :: ContractAddress ::
+        cairo_serialized_size(& __rust.new_owner); __size
+    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
+    core :: types :: FieldElement >
+    {
+        let mut __out : Vec < starknet :: core :: types :: FieldElement > =
+        vec! [];
+        __out.extend(cainome :: cairo_serde :: ContractAddress ::
+        cairo_serialize(& __rust.previous_owner));
+        __out.extend(cainome :: cairo_serde :: ContractAddress ::
+        cairo_serialize(& __rust.new_owner)); __out
+    } fn
+    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
+    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
+    {
+        let mut __offset = __offset; let previous_owner = cainome ::
+        cairo_serde :: ContractAddress :: cairo_deserialize(__felts, __offset)
+        ? ; __offset += cainome :: cairo_serde :: ContractAddress ::
+        cairo_serialized_size(& previous_owner); let new_owner = cainome ::
+        cairo_serde :: ContractAddress :: cairo_deserialize(__felts, __offset)
+        ? ; __offset += cainome :: cairo_serde :: ContractAddress ::
+        cairo_serialized_size(& new_owner);
+        Ok(OwnershipTransferStarted { previous_owner, new_owner })
+    }
+} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct
+OwnershipTransferred
+{
+    pub previous_owner : cainome :: cairo_serde :: ContractAddress, pub
+    new_owner : cainome :: cairo_serde :: ContractAddress
+} impl cainome :: cairo_serde :: CairoSerde for OwnershipTransferred
+{
+    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
+    usize > = None; #[inline] fn
+    cairo_serialized_size(__rust : & Self :: RustType) -> usize
+    {
+        let mut __size = 0; __size += cainome :: cairo_serde ::
+        ContractAddress :: cairo_serialized_size(& __rust.previous_owner);
+        __size += cainome :: cairo_serde :: ContractAddress ::
+        cairo_serialized_size(& __rust.new_owner); __size
+    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
+    core :: types :: FieldElement >
+    {
+        let mut __out : Vec < starknet :: core :: types :: FieldElement > =
+        vec! [];
+        __out.extend(cainome :: cairo_serde :: ContractAddress ::
+        cairo_serialize(& __rust.previous_owner));
+        __out.extend(cainome :: cairo_serde :: ContractAddress ::
+        cairo_serialize(& __rust.new_owner)); __out
+    } fn
+    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
+    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
+    {
+        let mut __offset = __offset; let previous_owner = cainome ::
+        cairo_serde :: ContractAddress :: cairo_deserialize(__felts, __offset)
+        ? ; __offset += cainome :: cairo_serde :: ContractAddress ::
+        cairo_serialized_size(& previous_owner); let new_owner = cainome ::
+        cairo_serde :: ContractAddress :: cairo_deserialize(__felts, __offset)
+        ? ; __offset += cainome :: cairo_serde :: ContractAddress ::
+        cairo_serialized_size(& new_owner);
+        Ok(OwnershipTransferred { previous_owner, new_owner })
+    }
+} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct MemberRemoved
 { pub message : cainome :: cairo_serde :: ByteArray } impl cainome ::
-cairo_serde :: CairoSerde for ContextCreated
+cairo_serde :: CairoSerde for MemberRemoved
 {
     type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
     usize > = None; #[inline] fn
@@ -413,184 +439,7 @@ cairo_serde :: CairoSerde for ContextCreated
         let mut __offset = __offset; let message = cainome :: cairo_serde ::
         ByteArray :: cairo_deserialize(__felts, __offset) ? ; __offset +=
         cainome :: cairo_serde :: ByteArray ::
-        cairo_serialized_size(& message); Ok(ContextCreated { message })
-    }
-} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub struct ApplicationUpdated
-{ pub message : cainome :: cairo_serde :: ByteArray } impl cainome ::
-cairo_serde :: CairoSerde for ApplicationUpdated
-{
-    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
-    usize > = None; #[inline] fn
-    cairo_serialized_size(__rust : & Self :: RustType) -> usize
-    {
-        let mut __size = 0; __size += cainome :: cairo_serde :: ByteArray ::
-        cairo_serialized_size(& __rust.message); __size
-    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
-    core :: types :: FieldElement >
-    {
-        let mut __out : Vec < starknet :: core :: types :: FieldElement > =
-        vec! [];
-        __out.extend(cainome :: cairo_serde :: ByteArray ::
-        cairo_serialize(& __rust.message)); __out
-    } fn
-    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
-    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
-    {
-        let mut __offset = __offset; let message = cainome :: cairo_serde ::
-        ByteArray :: cairo_deserialize(__felts, __offset) ? ; __offset +=
-        cainome :: cairo_serde :: ByteArray ::
-        cairo_serialized_size(& message); Ok(ApplicationUpdated { message })
-    }
-} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub enum RequestKind
-{ Context(ContextRequest) } impl cainome :: cairo_serde :: CairoSerde for
-RequestKind
-{
-    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
-    usize > = std :: option :: Option :: None; #[inline] fn
-    cairo_serialized_size(__rust : & Self :: RustType) -> usize
-    {
-        match __rust
-        {
-            RequestKind :: Context(val) => ContextRequest ::
-            cairo_serialized_size(val) + 1, _ => 0
-        }
-    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
-    core :: types :: FieldElement >
-    {
-        match __rust
-        {
-            RequestKind :: Context(val) =>
-            {
-                let mut temp = vec! [];
-                temp.extend(usize :: cairo_serialize(& 0usize));
-                temp.extend(ContextRequest :: cairo_serialize(val)); temp
-            }, _ => vec! []
-        }
-    } fn
-    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
-    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
-    {
-        let __index : u128 = __felts [__offset].try_into().unwrap(); match
-        __index as usize
-        {
-            0usize =>
-            Ok(RequestKind ::
-            Context(ContextRequest :: cairo_deserialize(__felts, __offset + 1)
-            ?)), _ => return
-            Err(cainome :: cairo_serde :: Error ::
-            Deserialize(format!
-            ("Index not handle for enum {}", "RequestKind")))
-        }
-    }
-} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub enum ContextRequestKind
-{
-    Add((starknet :: core :: types :: FieldElement, Application)),
-    UpdateApplication(Application),
-    AddMembers(Vec < starknet :: core :: types :: FieldElement >),
-    RemoveMembers(Vec < starknet :: core :: types :: FieldElement >),
-    Grant(Vec < (starknet :: core :: types :: FieldElement, Capability) >),
-    Revoke(Vec < (starknet :: core :: types :: FieldElement, Capability) >)
-} impl cainome :: cairo_serde :: CairoSerde for ContextRequestKind
-{
-    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
-    usize > = std :: option :: Option :: None; #[inline] fn
-    cairo_serialized_size(__rust : & Self :: RustType) -> usize
-    {
-        match __rust
-        {
-            ContextRequestKind :: Add(val) => <
-            (starknet :: core :: types :: FieldElement, Application) > ::
-            cairo_serialized_size(val) + 1, ContextRequestKind ::
-            UpdateApplication(val) => Application ::
-            cairo_serialized_size(val) + 1, ContextRequestKind ::
-            AddMembers(val) => Vec :: < starknet :: core :: types ::
-            FieldElement > :: cairo_serialized_size(val) + 1,
-            ContextRequestKind :: RemoveMembers(val) => Vec :: < starknet ::
-            core :: types :: FieldElement > :: cairo_serialized_size(val) + 1,
-            ContextRequestKind :: Grant(val) => Vec :: <
-            (starknet :: core :: types :: FieldElement, Capability) > ::
-            cairo_serialized_size(val) + 1, ContextRequestKind :: Revoke(val)
-            => Vec :: <
-            (starknet :: core :: types :: FieldElement, Capability) > ::
-            cairo_serialized_size(val) + 1, _ => 0
-        }
-    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
-    core :: types :: FieldElement >
-    {
-        match __rust
-        {
-            ContextRequestKind :: Add(val) =>
-            {
-                let mut temp = vec! [];
-                temp.extend(usize :: cairo_serialize(& 0usize));
-                temp.extend(<
-                (starknet :: core :: types :: FieldElement, Application) > ::
-                cairo_serialize(val)); temp
-            }, ContextRequestKind :: UpdateApplication(val) =>
-            {
-                let mut temp = vec! [];
-                temp.extend(usize :: cairo_serialize(& 1usize));
-                temp.extend(Application :: cairo_serialize(val)); temp
-            }, ContextRequestKind :: AddMembers(val) =>
-            {
-                let mut temp = vec! [];
-                temp.extend(usize :: cairo_serialize(& 2usize));
-                temp.extend(Vec :: < starknet :: core :: types :: FieldElement
-                > :: cairo_serialize(val)); temp
-            }, ContextRequestKind :: RemoveMembers(val) =>
-            {
-                let mut temp = vec! [];
-                temp.extend(usize :: cairo_serialize(& 3usize));
-                temp.extend(Vec :: < starknet :: core :: types :: FieldElement
-                > :: cairo_serialize(val)); temp
-            }, ContextRequestKind :: Grant(val) =>
-            {
-                let mut temp = vec! [];
-                temp.extend(usize :: cairo_serialize(& 4usize));
-                temp.extend(Vec :: <
-                (starknet :: core :: types :: FieldElement, Capability) > ::
-                cairo_serialize(val)); temp
-            }, ContextRequestKind :: Revoke(val) =>
-            {
-                let mut temp = vec! [];
-                temp.extend(usize :: cairo_serialize(& 5usize));
-                temp.extend(Vec :: <
-                (starknet :: core :: types :: FieldElement, Capability) > ::
-                cairo_serialize(val)); temp
-            }, _ => vec! []
-        }
-    } fn
-    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
-    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
-    {
-        let __index : u128 = __felts [__offset].try_into().unwrap(); match
-        __index as usize
-        {
-            0usize =>
-            Ok(ContextRequestKind ::
-            Add(< (starknet :: core :: types :: FieldElement, Application) >
-            :: cairo_deserialize(__felts, __offset + 1) ?)), 1usize =>
-            Ok(ContextRequestKind ::
-            UpdateApplication(Application ::
-            cairo_deserialize(__felts, __offset + 1) ?)), 2usize =>
-            Ok(ContextRequestKind ::
-            AddMembers(Vec :: < starknet :: core :: types :: FieldElement > ::
-            cairo_deserialize(__felts, __offset + 1) ?)), 3usize =>
-            Ok(ContextRequestKind ::
-            RemoveMembers(Vec :: < starknet :: core :: types :: FieldElement >
-            :: cairo_deserialize(__felts, __offset + 1) ?)), 4usize =>
-            Ok(ContextRequestKind ::
-            Grant(Vec :: <
-            (starknet :: core :: types :: FieldElement, Capability) > ::
-            cairo_deserialize(__felts, __offset + 1) ?)), 5usize =>
-            Ok(ContextRequestKind ::
-            Revoke(Vec :: <
-            (starknet :: core :: types :: FieldElement, Capability) > ::
-            cairo_deserialize(__felts, __offset + 1) ?)), _ => return
-            Err(cainome :: cairo_serde :: Error ::
-            Deserialize(format!
-            ("Index not handle for enum {}", "ContextRequestKind")))
-        }
+        cairo_serialized_size(& message); Ok(MemberRemoved { message })
     }
 } #[derive(Debug, PartialEq, PartialOrd, Clone)] pub enum Capability
 { ManageApplication, ManageMembers } impl cainome :: cairo_serde :: CairoSerde
@@ -627,124 +476,6 @@ for Capability
             Deserialize(format!
             ("Index not handle for enum {}", "Capability")))
         }
-    }
-} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub enum Event
-{
-    OwnershipTransferred(OwnershipTransferred),
-    OwnershipTransferStarted(OwnershipTransferStarted)
-} impl cainome :: cairo_serde :: CairoSerde for Event
-{
-    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
-    usize > = std :: option :: Option :: None; #[inline] fn
-    cairo_serialized_size(__rust : & Self :: RustType) -> usize
-    {
-        match __rust
-        {
-            Event :: OwnershipTransferred(val) => OwnershipTransferred ::
-            cairo_serialized_size(val) + 1, Event ::
-            OwnershipTransferStarted(val) => OwnershipTransferStarted ::
-            cairo_serialized_size(val) + 1, _ => 0
-        }
-    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
-    core :: types :: FieldElement >
-    {
-        match __rust
-        {
-            Event :: OwnershipTransferred(val) =>
-            {
-                let mut temp = vec! [];
-                temp.extend(usize :: cairo_serialize(& 0usize));
-                temp.extend(OwnershipTransferred :: cairo_serialize(val));
-                temp
-            }, Event :: OwnershipTransferStarted(val) =>
-            {
-                let mut temp = vec! [];
-                temp.extend(usize :: cairo_serialize(& 1usize));
-                temp.extend(OwnershipTransferStarted :: cairo_serialize(val));
-                temp
-            }, _ => vec! []
-        }
-    } fn
-    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
-    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
-    {
-        let __index : u128 = __felts [__offset].try_into().unwrap(); match
-        __index as usize
-        {
-            0usize =>
-            Ok(Event ::
-            OwnershipTransferred(OwnershipTransferred ::
-            cairo_deserialize(__felts, __offset + 1) ?)), 1usize =>
-            Ok(Event ::
-            OwnershipTransferStarted(OwnershipTransferStarted ::
-            cairo_deserialize(__felts, __offset + 1) ?)), _ => return
-            Err(cainome :: cairo_serde :: Error ::
-            Deserialize(format! ("Index not handle for enum {}", "Event")))
-        }
-    }
-} impl TryFrom < starknet :: core :: types :: EmittedEvent > for Event
-{
-    type Error = String; fn
-    try_from(event : starknet :: core :: types :: EmittedEvent) -> Result <
-    Self, Self :: Error >
-    {
-        use cainome :: cairo_serde :: CairoSerde; if event.keys.is_empty()
-        { return Err("Event has no key".to_string()); } let selector =
-        event.keys [0]; if selector == starknet :: core :: utils ::
-        get_selector_from_name("OwnershipTransferred").unwrap_or_else(| _ |
-        panic! ("Invalid selector for {}", "OwnershipTransferred"))
-        {
-            let mut key_offset = 0 + 1; let mut data_offset = 0; let
-            previous_owner = match cainome :: cairo_serde :: ContractAddress
-            :: cairo_deserialize(& event.keys, key_offset)
-            {
-                Ok(v) => v, Err(e) => return
-                Err(format!
-                ("Could not deserialize field {} for {}: {:?}",
-                "previous_owner", "OwnershipTransferred", e)),
-            }; key_offset += cainome :: cairo_serde :: ContractAddress ::
-            cairo_serialized_size(& previous_owner); let new_owner = match
-            cainome :: cairo_serde :: ContractAddress ::
-            cairo_deserialize(& event.keys, key_offset)
-            {
-                Ok(v) => v, Err(e) => return
-                Err(format!
-                ("Could not deserialize field {} for {}: {:?}", "new_owner",
-                "OwnershipTransferred", e)),
-            }; key_offset += cainome :: cairo_serde :: ContractAddress ::
-            cairo_serialized_size(& new_owner); return
-            Ok(Event ::
-            OwnershipTransferred(OwnershipTransferred
-            { previous_owner, new_owner }))
-        }; let selector = event.keys [0]; if selector == starknet :: core ::
-        utils ::
-        get_selector_from_name("OwnershipTransferStarted").unwrap_or_else(| _
-        | panic! ("Invalid selector for {}", "OwnershipTransferStarted"))
-        {
-            let mut key_offset = 0 + 1; let mut data_offset = 0; let
-            previous_owner = match cainome :: cairo_serde :: ContractAddress
-            :: cairo_deserialize(& event.keys, key_offset)
-            {
-                Ok(v) => v, Err(e) => return
-                Err(format!
-                ("Could not deserialize field {} for {}: {:?}",
-                "previous_owner", "OwnershipTransferStarted", e)),
-            }; key_offset += cainome :: cairo_serde :: ContractAddress ::
-            cairo_serialized_size(& previous_owner); let new_owner = match
-            cainome :: cairo_serde :: ContractAddress ::
-            cairo_deserialize(& event.keys, key_offset)
-            {
-                Ok(v) => v, Err(e) => return
-                Err(format!
-                ("Could not deserialize field {} for {}: {:?}", "new_owner",
-                "OwnershipTransferStarted", e)),
-            }; key_offset += cainome :: cairo_serde :: ContractAddress ::
-            cairo_serialized_size(& new_owner); return
-            Ok(Event ::
-            OwnershipTransferStarted(OwnershipTransferStarted
-            { previous_owner, new_owner }))
-        };
-        Err(format! ("Could not match any event from keys {:?}", event.keys))
     }
 } #[derive(Debug, PartialEq, PartialOrd, Clone)] pub enum Event
 {
@@ -1010,22 +741,279 @@ for Capability
         };
         Err(format! ("Could not match any event from keys {:?}", event.keys))
     }
+} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub enum RequestKind
+{ Context(ContextRequest) } impl cainome :: cairo_serde :: CairoSerde for
+RequestKind
+{
+    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
+    usize > = std :: option :: Option :: None; #[inline] fn
+    cairo_serialized_size(__rust : & Self :: RustType) -> usize
+    {
+        match __rust
+        {
+            RequestKind :: Context(val) => ContextRequest ::
+            cairo_serialized_size(val) + 1, _ => 0
+        }
+    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
+    core :: types :: FieldElement >
+    {
+        match __rust
+        {
+            RequestKind :: Context(val) =>
+            {
+                let mut temp = vec! [];
+                temp.extend(usize :: cairo_serialize(& 0usize));
+                temp.extend(ContextRequest :: cairo_serialize(val)); temp
+            }, _ => vec! []
+        }
+    } fn
+    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
+    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
+    {
+        let __index : u128 = __felts [__offset].try_into().unwrap(); match
+        __index as usize
+        {
+            0usize =>
+            Ok(RequestKind ::
+            Context(ContextRequest :: cairo_deserialize(__felts, __offset + 1)
+            ?)), _ => return
+            Err(cainome :: cairo_serde :: Error ::
+            Deserialize(format!
+            ("Index not handle for enum {}", "RequestKind")))
+        }
+    }
+} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub enum ContextRequestKind
+{
+    Add((starknet :: core :: types :: FieldElement, Application)),
+    UpdateApplication(Application),
+    AddMembers(Vec < starknet :: core :: types :: FieldElement >),
+    RemoveMembers(Vec < starknet :: core :: types :: FieldElement >),
+    Grant(Vec < (starknet :: core :: types :: FieldElement, Capability) >),
+    Revoke(Vec < (starknet :: core :: types :: FieldElement, Capability) >)
+} impl cainome :: cairo_serde :: CairoSerde for ContextRequestKind
+{
+    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
+    usize > = std :: option :: Option :: None; #[inline] fn
+    cairo_serialized_size(__rust : & Self :: RustType) -> usize
+    {
+        match __rust
+        {
+            ContextRequestKind :: Add(val) => <
+            (starknet :: core :: types :: FieldElement, Application) > ::
+            cairo_serialized_size(val) + 1, ContextRequestKind ::
+            UpdateApplication(val) => Application ::
+            cairo_serialized_size(val) + 1, ContextRequestKind ::
+            AddMembers(val) => Vec :: < starknet :: core :: types ::
+            FieldElement > :: cairo_serialized_size(val) + 1,
+            ContextRequestKind :: RemoveMembers(val) => Vec :: < starknet ::
+            core :: types :: FieldElement > :: cairo_serialized_size(val) + 1,
+            ContextRequestKind :: Grant(val) => Vec :: <
+            (starknet :: core :: types :: FieldElement, Capability) > ::
+            cairo_serialized_size(val) + 1, ContextRequestKind :: Revoke(val)
+            => Vec :: <
+            (starknet :: core :: types :: FieldElement, Capability) > ::
+            cairo_serialized_size(val) + 1, _ => 0
+        }
+    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
+    core :: types :: FieldElement >
+    {
+        match __rust
+        {
+            ContextRequestKind :: Add(val) =>
+            {
+                let mut temp = vec! [];
+                temp.extend(usize :: cairo_serialize(& 0usize));
+                temp.extend(<
+                (starknet :: core :: types :: FieldElement, Application) > ::
+                cairo_serialize(val)); temp
+            }, ContextRequestKind :: UpdateApplication(val) =>
+            {
+                let mut temp = vec! [];
+                temp.extend(usize :: cairo_serialize(& 1usize));
+                temp.extend(Application :: cairo_serialize(val)); temp
+            }, ContextRequestKind :: AddMembers(val) =>
+            {
+                let mut temp = vec! [];
+                temp.extend(usize :: cairo_serialize(& 2usize));
+                temp.extend(Vec :: < starknet :: core :: types :: FieldElement
+                > :: cairo_serialize(val)); temp
+            }, ContextRequestKind :: RemoveMembers(val) =>
+            {
+                let mut temp = vec! [];
+                temp.extend(usize :: cairo_serialize(& 3usize));
+                temp.extend(Vec :: < starknet :: core :: types :: FieldElement
+                > :: cairo_serialize(val)); temp
+            }, ContextRequestKind :: Grant(val) =>
+            {
+                let mut temp = vec! [];
+                temp.extend(usize :: cairo_serialize(& 4usize));
+                temp.extend(Vec :: <
+                (starknet :: core :: types :: FieldElement, Capability) > ::
+                cairo_serialize(val)); temp
+            }, ContextRequestKind :: Revoke(val) =>
+            {
+                let mut temp = vec! [];
+                temp.extend(usize :: cairo_serialize(& 5usize));
+                temp.extend(Vec :: <
+                (starknet :: core :: types :: FieldElement, Capability) > ::
+                cairo_serialize(val)); temp
+            }, _ => vec! []
+        }
+    } fn
+    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
+    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
+    {
+        let __index : u128 = __felts [__offset].try_into().unwrap(); match
+        __index as usize
+        {
+            0usize =>
+            Ok(ContextRequestKind ::
+            Add(< (starknet :: core :: types :: FieldElement, Application) >
+            :: cairo_deserialize(__felts, __offset + 1) ?)), 1usize =>
+            Ok(ContextRequestKind ::
+            UpdateApplication(Application ::
+            cairo_deserialize(__felts, __offset + 1) ?)), 2usize =>
+            Ok(ContextRequestKind ::
+            AddMembers(Vec :: < starknet :: core :: types :: FieldElement > ::
+            cairo_deserialize(__felts, __offset + 1) ?)), 3usize =>
+            Ok(ContextRequestKind ::
+            RemoveMembers(Vec :: < starknet :: core :: types :: FieldElement >
+            :: cairo_deserialize(__felts, __offset + 1) ?)), 4usize =>
+            Ok(ContextRequestKind ::
+            Grant(Vec :: <
+            (starknet :: core :: types :: FieldElement, Capability) > ::
+            cairo_deserialize(__felts, __offset + 1) ?)), 5usize =>
+            Ok(ContextRequestKind ::
+            Revoke(Vec :: <
+            (starknet :: core :: types :: FieldElement, Capability) > ::
+            cairo_deserialize(__felts, __offset + 1) ?)), _ => return
+            Err(cainome :: cairo_serde :: Error ::
+            Deserialize(format!
+            ("Index not handle for enum {}", "ContextRequestKind")))
+        }
+    }
+} #[derive(Debug, PartialEq, PartialOrd, Clone)] pub enum Event
+{
+    OwnershipTransferred(OwnershipTransferred),
+    OwnershipTransferStarted(OwnershipTransferStarted)
+} impl cainome :: cairo_serde :: CairoSerde for Event
+{
+    type RustType = Self; const SERIALIZED_SIZE : std :: option :: Option <
+    usize > = std :: option :: Option :: None; #[inline] fn
+    cairo_serialized_size(__rust : & Self :: RustType) -> usize
+    {
+        match __rust
+        {
+            Event :: OwnershipTransferred(val) => OwnershipTransferred ::
+            cairo_serialized_size(val) + 1, Event ::
+            OwnershipTransferStarted(val) => OwnershipTransferStarted ::
+            cairo_serialized_size(val) + 1, _ => 0
+        }
+    } fn cairo_serialize(__rust : & Self :: RustType) -> Vec < starknet ::
+    core :: types :: FieldElement >
+    {
+        match __rust
+        {
+            Event :: OwnershipTransferred(val) =>
+            {
+                let mut temp = vec! [];
+                temp.extend(usize :: cairo_serialize(& 0usize));
+                temp.extend(OwnershipTransferred :: cairo_serialize(val));
+                temp
+            }, Event :: OwnershipTransferStarted(val) =>
+            {
+                let mut temp = vec! [];
+                temp.extend(usize :: cairo_serialize(& 1usize));
+                temp.extend(OwnershipTransferStarted :: cairo_serialize(val));
+                temp
+            }, _ => vec! []
+        }
+    } fn
+    cairo_deserialize(__felts : & [starknet :: core :: types :: FieldElement],
+    __offset : usize) -> cainome :: cairo_serde :: Result < Self :: RustType >
+    {
+        let __index : u128 = __felts [__offset].try_into().unwrap(); match
+        __index as usize
+        {
+            0usize =>
+            Ok(Event ::
+            OwnershipTransferred(OwnershipTransferred ::
+            cairo_deserialize(__felts, __offset + 1) ?)), 1usize =>
+            Ok(Event ::
+            OwnershipTransferStarted(OwnershipTransferStarted ::
+            cairo_deserialize(__felts, __offset + 1) ?)), _ => return
+            Err(cainome :: cairo_serde :: Error ::
+            Deserialize(format! ("Index not handle for enum {}", "Event")))
+        }
+    }
+} impl TryFrom < starknet :: core :: types :: EmittedEvent > for Event
+{
+    type Error = String; fn
+    try_from(event : starknet :: core :: types :: EmittedEvent) -> Result <
+    Self, Self :: Error >
+    {
+        use cainome :: cairo_serde :: CairoSerde; if event.keys.is_empty()
+        { return Err("Event has no key".to_string()); } let selector =
+        event.keys [0]; if selector == starknet :: core :: utils ::
+        get_selector_from_name("OwnershipTransferred").unwrap_or_else(| _ |
+        panic! ("Invalid selector for {}", "OwnershipTransferred"))
+        {
+            let mut key_offset = 0 + 1; let mut data_offset = 0; let
+            previous_owner = match cainome :: cairo_serde :: ContractAddress
+            :: cairo_deserialize(& event.keys, key_offset)
+            {
+                Ok(v) => v, Err(e) => return
+                Err(format!
+                ("Could not deserialize field {} for {}: {:?}",
+                "previous_owner", "OwnershipTransferred", e)),
+            }; key_offset += cainome :: cairo_serde :: ContractAddress ::
+            cairo_serialized_size(& previous_owner); let new_owner = match
+            cainome :: cairo_serde :: ContractAddress ::
+            cairo_deserialize(& event.keys, key_offset)
+            {
+                Ok(v) => v, Err(e) => return
+                Err(format!
+                ("Could not deserialize field {} for {}: {:?}", "new_owner",
+                "OwnershipTransferred", e)),
+            }; key_offset += cainome :: cairo_serde :: ContractAddress ::
+            cairo_serialized_size(& new_owner); return
+            Ok(Event ::
+            OwnershipTransferred(OwnershipTransferred
+            { previous_owner, new_owner }))
+        }; let selector = event.keys [0]; if selector == starknet :: core ::
+        utils ::
+        get_selector_from_name("OwnershipTransferStarted").unwrap_or_else(| _
+        | panic! ("Invalid selector for {}", "OwnershipTransferStarted"))
+        {
+            let mut key_offset = 0 + 1; let mut data_offset = 0; let
+            previous_owner = match cainome :: cairo_serde :: ContractAddress
+            :: cairo_deserialize(& event.keys, key_offset)
+            {
+                Ok(v) => v, Err(e) => return
+                Err(format!
+                ("Could not deserialize field {} for {}: {:?}",
+                "previous_owner", "OwnershipTransferStarted", e)),
+            }; key_offset += cainome :: cairo_serde :: ContractAddress ::
+            cairo_serialized_size(& previous_owner); let new_owner = match
+            cainome :: cairo_serde :: ContractAddress ::
+            cairo_deserialize(& event.keys, key_offset)
+            {
+                Ok(v) => v, Err(e) => return
+                Err(format!
+                ("Could not deserialize field {} for {}: {:?}", "new_owner",
+                "OwnershipTransferStarted", e)),
+            }; key_offset += cainome :: cairo_serde :: ContractAddress ::
+            cairo_serialized_size(& new_owner); return
+            Ok(Event ::
+            OwnershipTransferStarted(OwnershipTransferStarted
+            { previous_owner, new_owner }))
+        };
+        Err(format! ("Could not match any event from keys {:?}", event.keys))
+    }
 } impl < A : starknet :: accounts :: ConnectedAccount + Sync > ContextConfig <
 A >
 {
     #[allow(clippy :: ptr_arg)] #[allow(clippy :: too_many_arguments)] pub fn
-    owner(& self,) -> cainome :: cairo_serde :: call :: FCall < A :: Provider,
-    cainome :: cairo_serde :: ContractAddress >
-    {
-        use cainome :: cairo_serde :: CairoSerde; let mut __calldata = vec!
-        []; let __call = starknet :: core :: types :: FunctionCall
-        {
-            contract_address : self.address, entry_point_selector : starknet
-            :: macros :: selector! ("owner"), calldata : __calldata,
-        }; cainome :: cairo_serde :: call :: FCall ::
-        new(__call, self.provider(),)
-    } #[allow(clippy :: ptr_arg)] #[allow(clippy :: too_many_arguments)] pub
-    fn
     application(& self, context_id : & starknet :: core :: types ::
     FieldElement) -> cainome :: cairo_serde :: call :: FCall < A :: Provider,
     Application >
@@ -1097,6 +1085,60 @@ A >
             __calldata,
         }; cainome :: cairo_serde :: call :: FCall ::
         new(__call, self.provider(),)
+    } #[allow(clippy :: ptr_arg)] #[allow(clippy :: too_many_arguments)] pub
+    fn owner(& self,) -> cainome :: cairo_serde :: call :: FCall < A ::
+    Provider, cainome :: cairo_serde :: ContractAddress >
+    {
+        use cainome :: cairo_serde :: CairoSerde; let mut __calldata = vec!
+        []; let __call = starknet :: core :: types :: FunctionCall
+        {
+            contract_address : self.address, entry_point_selector : starknet
+            :: macros :: selector! ("owner"), calldata : __calldata,
+        }; cainome :: cairo_serde :: call :: FCall ::
+        new(__call, self.provider(),)
+    } #[allow(clippy :: ptr_arg)] #[allow(clippy :: too_many_arguments)] pub
+    fn mutate_getcall(& self, signed_request : & Signed :: < Request >) ->
+    starknet :: accounts :: Call
+    {
+        use cainome :: cairo_serde :: CairoSerde; let mut __calldata = vec!
+        [];
+        __calldata.extend(Signed :: < Request > ::
+        cairo_serialize(signed_request)); starknet :: accounts :: Call
+        {
+            to : self.address, selector : starknet :: macros :: selector!
+            ("mutate"), calldata : __calldata,
+        }
+    } #[allow(clippy :: ptr_arg)] pub fn
+    mutate(& self, signed_request : & Signed :: < Request >) -> starknet ::
+    accounts :: Execution < A >
+    {
+        use cainome :: cairo_serde :: CairoSerde; let mut __calldata = vec!
+        [];
+        __calldata.extend(Signed :: < Request > ::
+        cairo_serialize(signed_request)); let __call = starknet :: accounts ::
+        Call
+        {
+            to : self.address, selector : starknet :: macros :: selector!
+            ("mutate"), calldata : __calldata,
+        }; self.account.execute(vec! [__call])
+    } #[allow(clippy :: ptr_arg)] #[allow(clippy :: too_many_arguments)] pub
+    fn erase_getcall(& self,) -> starknet :: accounts :: Call
+    {
+        use cainome :: cairo_serde :: CairoSerde; let mut __calldata = vec!
+        []; starknet :: accounts :: Call
+        {
+            to : self.address, selector : starknet :: macros :: selector!
+            ("erase"), calldata : __calldata,
+        }
+    } #[allow(clippy :: ptr_arg)] pub fn erase(& self,) -> starknet ::
+    accounts :: Execution < A >
+    {
+        use cainome :: cairo_serde :: CairoSerde; let mut __calldata = vec!
+        []; let __call = starknet :: accounts :: Call
+        {
+            to : self.address, selector : starknet :: macros :: selector!
+            ("erase"), calldata : __calldata,
+        }; self.account.execute(vec! [__call])
     } #[allow(clippy :: ptr_arg)] #[allow(clippy :: too_many_arguments)] pub
     fn
     transfer_ownership_getcall(& self, new_owner : & cainome :: cairo_serde ::
@@ -1183,66 +1225,11 @@ A >
             to : self.address, selector : starknet :: macros :: selector!
             ("renounceOwnership"), calldata : __calldata,
         }; self.account.execute(vec! [__call])
-    } #[allow(clippy :: ptr_arg)] #[allow(clippy :: too_many_arguments)] pub
-    fn mutate_getcall(& self, signed_request : & Signed :: < Request >) ->
-    starknet :: accounts :: Call
-    {
-        use cainome :: cairo_serde :: CairoSerde; let mut __calldata = vec!
-        [];
-        __calldata.extend(Signed :: < Request > ::
-        cairo_serialize(signed_request)); starknet :: accounts :: Call
-        {
-            to : self.address, selector : starknet :: macros :: selector!
-            ("mutate"), calldata : __calldata,
-        }
-    } #[allow(clippy :: ptr_arg)] pub fn
-    mutate(& self, signed_request : & Signed :: < Request >) -> starknet ::
-    accounts :: Execution < A >
-    {
-        use cainome :: cairo_serde :: CairoSerde; let mut __calldata = vec!
-        [];
-        __calldata.extend(Signed :: < Request > ::
-        cairo_serialize(signed_request)); let __call = starknet :: accounts ::
-        Call
-        {
-            to : self.address, selector : starknet :: macros :: selector!
-            ("mutate"), calldata : __calldata,
-        }; self.account.execute(vec! [__call])
-    } #[allow(clippy :: ptr_arg)] #[allow(clippy :: too_many_arguments)] pub
-    fn erase_getcall(& self,) -> starknet :: accounts :: Call
-    {
-        use cainome :: cairo_serde :: CairoSerde; let mut __calldata = vec!
-        []; starknet :: accounts :: Call
-        {
-            to : self.address, selector : starknet :: macros :: selector!
-            ("erase"), calldata : __calldata,
-        }
-    } #[allow(clippy :: ptr_arg)] pub fn erase(& self,) -> starknet ::
-    accounts :: Execution < A >
-    {
-        use cainome :: cairo_serde :: CairoSerde; let mut __calldata = vec!
-        []; let __call = starknet :: accounts :: Call
-        {
-            to : self.address, selector : starknet :: macros :: selector!
-            ("erase"), calldata : __calldata,
-        }; self.account.execute(vec! [__call])
     }
 } impl < P : starknet :: providers :: Provider + Sync > ContextConfigReader <
 P >
 {
     #[allow(clippy :: ptr_arg)] #[allow(clippy :: too_many_arguments)] pub fn
-    owner(& self,) -> cainome :: cairo_serde :: call :: FCall < P, cainome ::
-    cairo_serde :: ContractAddress >
-    {
-        use cainome :: cairo_serde :: CairoSerde; let mut __calldata = vec!
-        []; let __call = starknet :: core :: types :: FunctionCall
-        {
-            contract_address : self.address, entry_point_selector : starknet
-            :: macros :: selector! ("owner"), calldata : __calldata,
-        }; cainome :: cairo_serde :: call :: FCall ::
-        new(__call, self.provider(),)
-    } #[allow(clippy :: ptr_arg)] #[allow(clippy :: too_many_arguments)] pub
-    fn
     application(& self, context_id : & starknet :: core :: types ::
     FieldElement) -> cainome :: cairo_serde :: call :: FCall < P, Application
     >
@@ -1311,6 +1298,17 @@ P >
             contract_address : self.address, entry_point_selector : starknet
             :: macros :: selector! ("get_member_nonce"), calldata :
             __calldata,
+        }; cainome :: cairo_serde :: call :: FCall ::
+        new(__call, self.provider(),)
+    } #[allow(clippy :: ptr_arg)] #[allow(clippy :: too_many_arguments)] pub
+    fn owner(& self,) -> cainome :: cairo_serde :: call :: FCall < P, cainome
+    :: cairo_serde :: ContractAddress >
+    {
+        use cainome :: cairo_serde :: CairoSerde; let mut __calldata = vec!
+        []; let __call = starknet :: core :: types :: FunctionCall
+        {
+            contract_address : self.address, entry_point_selector : starknet
+            :: macros :: selector! ("owner"), calldata : __calldata,
         }; cainome :: cairo_serde :: call :: FCall ::
         new(__call, self.provider(),)
     }
