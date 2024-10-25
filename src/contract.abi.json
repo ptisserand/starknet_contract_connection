@@ -1,0 +1,503 @@
+[
+  {
+    "type": "impl",
+    "name": "ContextConfigsImpl",
+    "interface_name": "context_config::i_context_configs::IContextConfigs"
+  },
+  {
+    "type": "struct",
+    "name": "core::byte_array::ByteArray",
+    "members": [
+      {
+        "name": "data",
+        "type": "core::array::Array::<core::bytes_31::bytes31>"
+      },
+      {
+        "name": "pending_word",
+        "type": "core::felt252"
+      },
+      {
+        "name": "pending_word_len",
+        "type": "core::integer::u32"
+      }
+    ]
+  },
+  {
+    "type": "struct",
+    "name": "context_config::types::Application",
+    "members": [
+      {
+        "name": "id",
+        "type": "core::felt252"
+      },
+      {
+        "name": "blob",
+        "type": "core::felt252"
+      },
+      {
+        "name": "size",
+        "type": "core::integer::u64"
+      },
+      {
+        "name": "source",
+        "type": "core::byte_array::ByteArray"
+      },
+      {
+        "name": "metadata",
+        "type": "core::byte_array::ByteArray"
+      }
+    ]
+  },
+  {
+    "type": "enum",
+    "name": "context_config::types::Capability",
+    "variants": [
+      {
+        "name": "ManageApplication",
+        "type": "()"
+      },
+      {
+        "name": "ManageMembers",
+        "type": "()"
+      }
+    ]
+  },
+  {
+    "type": "struct",
+    "name": "context_config::types::Signed",
+    "members": [
+      {
+        "name": "payload",
+        "type": "core::array::Array::<core::felt252>"
+      },
+      {
+        "name": "signature",
+        "type": "(core::felt252, core::felt252)"
+      }
+    ]
+  },
+  {
+    "type": "enum",
+    "name": "context_config::types::ContextRequestKind",
+    "variants": [
+      {
+        "name": "Add",
+        "type": "(core::felt252, context_config::types::Application)"
+      },
+      {
+        "name": "UpdateApplication",
+        "type": "context_config::types::Application"
+      },
+      {
+        "name": "AddMembers",
+        "type": "core::array::Array::<core::felt252>"
+      },
+      {
+        "name": "RemoveMembers",
+        "type": "core::array::Array::<core::felt252>"
+      },
+      {
+        "name": "Grant",
+        "type": "core::array::Array::<(core::felt252, context_config::types::Capability)>"
+      },
+      {
+        "name": "Revoke",
+        "type": "core::array::Array::<(core::felt252, context_config::types::Capability)>"
+      }
+    ]
+  },
+  {
+    "type": "struct",
+    "name": "context_config::types::ContextRequest",
+    "members": [
+      {
+        "name": "context_id",
+        "type": "core::felt252"
+      },
+      {
+        "name": "kind",
+        "type": "context_config::types::ContextRequestKind"
+      }
+    ]
+  },
+  {
+    "type": "enum",
+    "name": "context_config::types::RequestKind",
+    "variants": [
+      {
+        "name": "Context",
+        "type": "context_config::types::ContextRequest"
+      }
+    ]
+  },
+  {
+    "type": "struct",
+    "name": "context_config::types::Request",
+    "members": [
+      {
+        "name": "kind",
+        "type": "context_config::types::RequestKind"
+      },
+      {
+        "name": "signer_id",
+        "type": "core::felt252"
+      },
+      {
+        "name": "nonce",
+        "type": "core::integer::u64"
+      }
+    ]
+  },
+  {
+    "type": "interface",
+    "name": "context_config::i_context_configs::IContextConfigs",
+    "items": [
+      {
+        "type": "function",
+        "name": "application",
+        "inputs": [
+          {
+            "name": "context_id",
+            "type": "core::felt252"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "context_config::types::Application"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "members",
+        "inputs": [
+          {
+            "name": "context_id",
+            "type": "core::felt252"
+          },
+          {
+            "name": "offset",
+            "type": "core::integer::u32"
+          },
+          {
+            "name": "length",
+            "type": "core::integer::u32"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "core::array::Array::<core::felt252>"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "privileges",
+        "inputs": [
+          {
+            "name": "context_id",
+            "type": "core::felt252"
+          },
+          {
+            "name": "identities",
+            "type": "core::array::Array::<core::felt252>"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "core::array::Array::<(core::felt252, core::array::Array::<context_config::types::Capability>)>"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "mutate",
+        "inputs": [
+          {
+            "name": "signed_request",
+            "type": "context_config::types::Signed"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "erase",
+        "inputs": [],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "get_member_nonce",
+        "inputs": [
+          {
+            "name": "context_id",
+            "type": "core::felt252"
+          },
+          {
+            "name": "member_id",
+            "type": "core::felt252"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "core::integer::u64"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "_dummy",
+        "inputs": [
+          {
+            "name": "request",
+            "type": "context_config::types::Request"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "view"
+      }
+    ]
+  },
+  {
+    "type": "impl",
+    "name": "OwnableMixinImpl",
+    "interface_name": "openzeppelin_access::ownable::interface::OwnableABI"
+  },
+  {
+    "type": "interface",
+    "name": "openzeppelin_access::ownable::interface::OwnableABI",
+    "items": [
+      {
+        "type": "function",
+        "name": "owner",
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "transfer_ownership",
+        "inputs": [
+          {
+            "name": "new_owner",
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "renounce_ownership",
+        "inputs": [],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "transferOwnership",
+        "inputs": [
+          {
+            "name": "newOwner",
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "renounceOwnership",
+        "inputs": [],
+        "outputs": [],
+        "state_mutability": "external"
+      }
+    ]
+  },
+  {
+    "type": "constructor",
+    "name": "constructor",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "core::starknet::contract_address::ContractAddress"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "context_config::types::ContextCreated",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "message",
+        "type": "core::byte_array::ByteArray",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "context_config::types::MemberAdded",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "message",
+        "type": "core::byte_array::ByteArray",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "context_config::types::ApplicationUpdated",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "message",
+        "type": "core::byte_array::ByteArray",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "context_config::types::CapabilityGranted",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "message",
+        "type": "core::byte_array::ByteArray",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "context_config::types::CapabilityRevoked",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "message",
+        "type": "core::byte_array::ByteArray",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "context_config::types::MemberRemoved",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "message",
+        "type": "core::byte_array::ByteArray",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferred",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "previous_owner",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "key"
+      },
+      {
+        "name": "new_owner",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "key"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferStarted",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "previous_owner",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "key"
+      },
+      {
+        "name": "new_owner",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "key"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "openzeppelin_access::ownable::ownable::OwnableComponent::Event",
+    "kind": "enum",
+    "variants": [
+      {
+        "name": "OwnershipTransferred",
+        "type": "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferred",
+        "kind": "nested"
+      },
+      {
+        "name": "OwnershipTransferStarted",
+        "type": "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferStarted",
+        "kind": "nested"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "context_config::ContextConfig::Event",
+    "kind": "enum",
+    "variants": [
+      {
+        "name": "ContextCreated",
+        "type": "context_config::types::ContextCreated",
+        "kind": "nested"
+      },
+      {
+        "name": "MemberAdded",
+        "type": "context_config::types::MemberAdded",
+        "kind": "nested"
+      },
+      {
+        "name": "ApplicationUpdated",
+        "type": "context_config::types::ApplicationUpdated",
+        "kind": "nested"
+      },
+      {
+        "name": "CapabilityGranted",
+        "type": "context_config::types::CapabilityGranted",
+        "kind": "nested"
+      },
+      {
+        "name": "CapabilityRevoked",
+        "type": "context_config::types::CapabilityRevoked",
+        "kind": "nested"
+      },
+      {
+        "name": "MemberRemoved",
+        "type": "context_config::types::MemberRemoved",
+        "kind": "nested"
+      },
+      {
+        "name": "OwnableEvent",
+        "type": "openzeppelin_access::ownable::ownable::OwnableComponent::Event",
+        "kind": "flat"
+      }
+    ]
+  }
+]
